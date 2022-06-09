@@ -4,9 +4,7 @@ import React from 'react'
 import { Alert, Container } from 'react-bootstrap'
 import { Route, useRouteMatch } from 'react-router-dom'
 import styled from 'styled-components'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Timeline from "../../components/Timeline";
-import {timelineItems} from "../timelineItems";
+import Roadmap from "../Roadmap";
 
 const Landing: React.FC = () => {
 
@@ -20,7 +18,7 @@ const Landing: React.FC = () => {
 			/>
 				<Route exact path={path}>
 					<Container>
-						<Timeline timelineItems={timelineItems} />
+						<Roadmap />
 					</Container>
 				</Route>
 		</Page>

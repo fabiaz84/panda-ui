@@ -2,7 +2,7 @@ import fetcher from 'bao/lib/fetcher'
 import GlobalStyle from 'GlobalStyle'
 import React, { useCallback, useEffect, useState } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { ThemeProvider } from 'styled-components'
+import styled, { ThemeProvider } from 'styled-components'
 import { SWRConfig } from 'swr'
 import MobileMenu from './components/MobileMenu'
 import TopBar from './components/TopBar'
@@ -17,6 +17,8 @@ import { fab } from '@fortawesome/free-brands-svg-icons'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 
 import Landing from './views/Landing'
+import {navItems} from 'views/navItems'
+import {Container} from "react-bootstrap";
 
 library.add(fas, fab)
 
@@ -52,6 +54,7 @@ const App: React.FC = () => {
 					isDarkMode={isDarkMode}
 					toggleTheme={toggleTheme}
 					onPresentMobileMenu={handlePresentMobileMenu}
+					navItems={navItems}
 				/>
 				<MobileMenu onDismiss={handleDismissMobileMenu} visible={mobileMenu} />
 				<Switch>

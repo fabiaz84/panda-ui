@@ -5,20 +5,20 @@ import React from 'react'
 import { Container } from 'react-bootstrap'
 import styled from 'styled-components'
 import { Button } from '../Button'
-import AccountButton from './components/AccountButton'
 import Nav from './components/Nav'
-import {navItems} from "../../views/navItems";
 
 interface TopBarProps {
 	isDarkMode: boolean
 	toggleTheme: () => void
-	onPresentMobileMenu: () => void
+	onPresentMobileMenu: () => void,
+	navItems: any
 }
 
 const TopBar: React.FC<TopBarProps> = ({
 	onPresentMobileMenu,
 	isDarkMode,
 	toggleTheme,
+	navItems
 }) => {
 	return (
 		<StyledTopBar>
