@@ -5,28 +5,25 @@ import styled from 'styled-components'
 const Nav: React.FC = () => {
 	return (
 		<StyledNav>
-			<StyledLink end to={{ pathname: '/' }}>
-				Markets
+			<StyledLink end to={{ pathname: '/farms' }}>
+				Home
 			</StyledLink>
-			<StyledLink end to={{ pathname: '/ballast' }}>
+			{/* <StyledLink end to={{ pathname: '/ballast' }}>
 				Ballast
-			</StyledLink>
+	</StyledLink> */}
 			<StyledLink end to={{ pathname: '/baskets' }}>
 				Baskets
 			</StyledLink>
 			<StyledLink end to={{ pathname: '/farms' }}>
 				Farms
 			</StyledLink>
-			<StyledLink end to={{ pathname: '/NFT' }}>
-				NFT
-			</StyledLink>
-			<StyledAbsoluteLink href='https://snapshot.page/#/baovotes.eth' target='_blank'>
+			<StyledAbsoluteLink href='https://snapshot.org/#/pandaswapbsc.eth' target='_blank'>
 				Vote
 			</StyledAbsoluteLink>
 			<StyledAbsoluteLink href='https://gov.bao.finance' target='_blank'>
 				Forum
 			</StyledAbsoluteLink>
-			<StyledAbsoluteLink href='https://docs.bao.finance' target='_blank'>
+			<StyledAbsoluteLink href='https://docs.bao.finance/franchises/panda' target='_blank'>
 				Docs
 			</StyledAbsoluteLink>
 		</StyledNav>

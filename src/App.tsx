@@ -19,7 +19,9 @@ import MobileMenu from './components/MobileMenu'
 import TopBar from './components/TopBar'
 import BaoProvider from './contexts/BaoProvider'
 import FarmsProvider from './contexts/Farms'
-import MarketsProvider from './contexts/Markets'
+{
+	/* import MarketsProvider from './contexts/Markets' */
+}
 import ModalsProvider from './contexts/Modals'
 import TransactionProvider from './contexts/Transactions'
 import theme from './theme'
@@ -30,13 +32,21 @@ function getLibrary(provider: provider) {
 
 const Web3ReactNetworkProvider = createWeb3ReactRoot('network')
 
-const Markets = React.lazy(() => import('views/Markets'))
-const Market = React.lazy(() => import('views/Markets/Market'))
-const Ballast = React.lazy(() => import('views/Ballast'))
+{
+	/* const Markets = React.lazy(() => import('views/Markets')) */
+}
+{
+	/* const Market = React.lazy(() => import('views/Markets/Market')) */
+}
+{
+	/* const Ballast = React.lazy(() => import('views/Ballast')) */
+}
 const Baskets = React.lazy(() => import('views/Baskets'))
 const Basket = React.lazy(() => import('views/Baskets/Basket'))
 const Farms = React.lazy(() => import('views/Farms'))
-const NFT = React.lazy(() => import('views/NFT'))
+{
+	/* const NFT = React.lazy(() => import('views/NFT')) */
+}
 
 const App: React.FC = () => {
 	const [mobileMenu, setMobileMenu] = useState(false)
@@ -69,13 +79,12 @@ const App: React.FC = () => {
 				<MobileMenu onDismiss={handleDismissMobileMenu} visible={mobileMenu} />
 				<Suspense fallback={<SpinnerLoader />}>
 					<Routes>
-						<Route path='/' element={<Markets />} />
-						<Route path='/markets/:marketId' element={<Market />} />
-						<Route path='/ballast' element={<Ballast />} />
+						{/* <Route path='/' element={<Markets />} />*/}
+						{/*	<Route path='/markets/:marketId' element={<Market />} />*/}
+						{/*	<Route path='/ballast' element={<Ballast />} />*/}
 						<Route path='/farms' element={<Farms />} />
 						<Route path='/baskets' element={<Baskets />} />
 						<Route path='/baskets/:basketId' element={<Basket />} />
-						<Route path='/NFT' element={<NFT />} />
 					</Routes>
 				</Suspense>
 			</Router>
@@ -91,20 +100,20 @@ const Providers: React.FC<ProvidersProps> = ({ children, isDarkMode }: Providers
 				<Web3ReactNetworkProvider getLibrary={getLibrary}>
 					<Web3ReactManager>
 						<BaoProvider>
-							<MarketsProvider>
-								<FarmsProvider>
-									<TransactionProvider>
-										<SWRConfig
-											value={{
-												fetcher,
-												refreshInterval: 300000,
-											}}
-										>
-											<ModalsProvider>{children}</ModalsProvider>
-										</SWRConfig>
-									</TransactionProvider>
-								</FarmsProvider>
-							</MarketsProvider>
+							{/* <MarketsProvider> */}
+							<FarmsProvider>
+								<TransactionProvider>
+									<SWRConfig
+										value={{
+											fetcher,
+											refreshInterval: 300000,
+										}}
+									>
+										<ModalsProvider>{children}</ModalsProvider>
+									</SWRConfig>
+								</TransactionProvider>
+							</FarmsProvider>
+							{/* </MarketsProvider> */}
 						</BaoProvider>
 					</Web3ReactManager>
 				</Web3ReactNetworkProvider>
