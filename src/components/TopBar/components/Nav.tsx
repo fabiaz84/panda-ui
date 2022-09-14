@@ -17,6 +17,15 @@ const Nav: React.FC = () => {
 			<StyledLink end to={{ pathname: '/farms' }}>
 				Farms
 			</StyledLink>
+			<StyledLink end to={{ pathname: '/bamboo' }}>
+				Bamboo
+			</StyledLink>
+			<StyledLink end to={{ pathname: '/rhino' }}>
+				Rhino
+			</StyledLink>
+			<StyledLink end to={{ pathname: '/swap' }}>
+				Swap
+			</StyledLink>
 			<StyledAbsoluteLink href='https://snapshot.org/#/pandaswapbsc.eth' target='_blank'>
 				Vote
 			</StyledAbsoluteLink>

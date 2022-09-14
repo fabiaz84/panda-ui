@@ -52,13 +52,13 @@ const Balances: React.FC = () => {
 					<UserStatsWrapper>
 						<StatWrapper>
 							<UserStat>
-								<h1>BAO Balance</h1>
+								<h1>PNDA Balance</h1>
 								<p>{account ? (window.screen.width > 1200 ? getDisplayBalance(baoBalance) : truncateNumber(baoBalance)) : '-'}</p>
 							</UserStat>
 						</StatWrapper>
 						<StatWrapper>
 							<UserStat>
-								<h1>Locked BAO</h1>
+								<h1>Locked PNDA</h1>
 								<p>{account ? (window.screen.width > 1200 ? getDisplayBalance(locks) : truncateNumber(locks)) : '-'}</p>
 							</UserStat>
 						</StatWrapper>
@@ -70,7 +70,7 @@ const Balances: React.FC = () => {
 						</StatWrapper>
 						<StatWrapper>
 							<UserStat>
-								<h1>Total BAO Supply</h1>
+								<h1>Total PNDA Supply</h1>
 								{totalSupply ? (
 									window.screen.width > 1200 ? (
 										getDisplayBalance(totalSupply)
@@ -84,7 +84,7 @@ const Balances: React.FC = () => {
 						</StatWrapper>
 						<StatWrapper>
 							<UserStat>
-								<h1>BAO Price</h1>
+								<h1>PNDA Price</h1>
 								{baoPrice ? `$${getDisplayBalance(baoPrice, 0)}` : <SpinnerLoader />}
 							</UserStat>
 						</StatWrapper>

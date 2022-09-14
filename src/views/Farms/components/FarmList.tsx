@@ -39,7 +39,7 @@ export const FarmList: React.FC = () => {
 
 	const userAddress = account ? account : tempAddress
 
-	const BLOCKS_PER_YEAR = new BigNumber(2336000)
+	const BLOCKS_PER_YEAR = new BigNumber(10512000)
 
 	const [archived, showArchived] = useState(false)
 

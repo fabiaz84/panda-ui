@@ -1,62 +1,63 @@
 import { Config } from './types'
 
 export default {
-	networkId: 1,
+	networkId: 56,
 	defaultRpc: {
-		chainId: '0x1',
-		rpcUrls: ['https://rpc.ankr.com/eth'],
-		blockExplorerUrls: ['https://etherscan.io'],
-		chainName: 'Ethereum Mainnet',
+		chainId: '0x38',
+		rpcUrls: ['https://bsc-dataseed1.binance.org/'],
+		blockExplorerUrls: ['https://bscscan.com'],
+		chainName: 'Binance Smart Chain',
 		nativeCurrency: {
-			name: 'ETH',
-			symbol: 'ETH',
+			name: 'BNB',
+			symbol: 'BNB',
 			decimals: 18,
 		},
 	},
 	addressMap: {
-		uniswapFactory: '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f',
-		uniswapFactoryV2: '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f',
-		BAO: '0x374cb8c27130e2c9e04f44303f3c8351b9de61c1',
-		DAI: '0x6B175474E89094C44Da98b954EedeAC495271d0F',
-		USDT: '0xdac17f958d2ee523a2206206994597c13d831ec7',
-		USDC: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
-		WETH: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
+		uniswapFactory: '0x9Ad32bf5DaFe152Cbe027398219611DB4E8753B3',
+		uniswapFactoryV2: '0x9Ad32bf5DaFe152Cbe027398219611DB4E8753B3',
+		BAO: '0x47dcc83a14ad53ed1f13d3cae8aa4115f07557c0',
+		PNDA: '0x47dcc83a14ad53ed1f13d3cae8aa4115f07557c0',
+		DAI: '0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3',
+		USDT: '0x55d398326f99059fF775485246999027B3197955',
+		USDC: '0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d',
+		WETH: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
 		DEAD: '0x000000000000000000000000000000000000dead',
-		//Synths
+		/* //Synths
 		baoUSD: '0x7945b0A6674b175695e5d1D08aE1e6F13744Abb0',
 		// NFTs
 		baoElder: '0x39c1f6e78c5200674c84c46dc5bf85ba9f6f630a',
 		baoSwap: '0x36e58282a053f888881cdaa4ba4f44dc7af15024',
-		//Baskets
+		Baskets
 		bDEFI: '0x583cb488eF632c3A959Aa19EcF7991731a2F728e',
-		bSTBL: '0x5ee08f40b637417bcC9d2C51B62F4820ec9cF5D8',
+		bSTBL: '0x5ee08f40b637417bcC9d2C51B62F4820ec9cF5D8', */
 	},
 	contracts: {
 		bao: {
-			1: {
-				address: '0x374cb8c27130e2c9e04f44303f3c8351b9de61c1',
+			56: {
+				address: '0x47dcc83a14ad53ed1f13d3cae8aa4115f07557c0',
 				abi: 'bao.json',
 			},
 		},
 		masterChef: {
-			1: {
-				address: '0xBD530a1c060DC600b951f16dc656E4EA451d1A2D',
+			56: {
+				address: '0x9942cb4c6180820E6211183ab29831641F58577A',
 				abi: 'masterchef.json',
 			},
 		},
 		weth: {
-			1: {
-				address: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
+			56: {
+				address: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
 				abi: 'weth.json',
 			},
 		},
 		wethPrice: {
-			1: {
-				address: '0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419',
+			56: {
+				address: '0x0567F2323251f0Aab15c8dFb1967E4e8A7D42aeE',
 				abi: 'chainoracle.json',
 			},
 		},
-		// Hard Synths
+		/* // Hard Synths
 		comptroller: {
 			1: {
 				address: '0x0Be1fdC1E87127c4fe7C05bAE6437e3cf90Bf8d8',
@@ -95,93 +96,93 @@ export default {
 				abi: 'simpleUniRecipe.json',
 			},
 		},
-		lendingRegistry: {
+		lendingRegistry: { 
 			1: {
 				address: '0x08a2b7D713e388123dc6678168656659d297d397',
 				abi: 'lendingRegistry.json',
 			},
-		},
+		},*/
 	},
 	subgraphs: {
 		sushiExchange: {
 			1: 'https://api.thegraph.com/subgraphs/name/sushiswap/exchange',
 		},
-		baoBurn: {
-			1: 'https://api.thegraph.com/subgraphs/name/clabby/bao-burn',
-		},
-		baoMarkets: {
-			1: 'https://api.thegraph.com/subgraphs/name/baofinance/bao-markets',
-		},
+		/*	baoBurn: {
+				1: 'https://api.thegraph.com/subgraphs/name/clabby/bao-burn',
+			},
+			baoMarkets: {
+				1: 'https://api.thegraph.com/subgraphs/name/baofinance/bao-markets',
+			}, */
 	},
 	markets: [
-		{
-			mid: 1,
-			symbol: 'bdUSD',
-			marketAddresses: {
-				1: '0xc0601094C0C88264Ba285fEf0a1b00eF13e79347',
+		/*	{
+				mid: 1,
+				symbol: 'bdUSD',
+				marketAddresses: {
+					1: '0xc0601094C0C88264Ba285fEf0a1b00eF13e79347',
+				},
+				underlyingAddresses: {
+					1: '0x7945b0A6674b175695e5d1D08aE1e6F13744Abb0',
+				},
+				isSynth: true,
+				icon: 'assets/img/tokens/bUSD.png',
+				coingeckoId: 'dai',
+				underlyingDecimals: 18,
+				underlyingSymbol: 'bUSD',
 			},
-			underlyingAddresses: {
-				1: '0x7945b0A6674b175695e5d1D08aE1e6F13744Abb0',
+			{
+				mid: 4,
+				symbol: 'bdETH',
+				marketAddresses: {
+					1: '0xF635fdF9B36b557bD281aa02fdfaeBEc04CD084A',
+				},
+				underlyingAddresses: {
+					1: 'ETH',
+				},
+				icon: 'assets/img/tokens/ETH.png',
+				coingeckoId: 'weth',
+				underlyingDecimals: 18,
 			},
-			isSynth: true,
-			icon: 'assets/img/tokens/bUSD.png',
-			coingeckoId: 'dai',
-			underlyingDecimals: 18,
-			underlyingSymbol: 'bUSD',
-		},
-		{
-			mid: 4,
-			symbol: 'bdETH',
-			marketAddresses: {
-				1: '0xF635fdF9B36b557bD281aa02fdfaeBEc04CD084A',
+			{
+				mid: 2,
+				symbol: 'bdETH',
+				archived: true,
+				marketAddresses: {
+					1: '0xe7a52262C1934951207c5fc7A944A82D283C83e5',
+				},
+				underlyingAddresses: {
+					1: 'ETH',
+				},
+				icon: 'assets/img/tokens/ETH.png',
+				coingeckoId: 'weth',
+				underlyingDecimals: 18,
 			},
-			underlyingAddresses: {
-				1: 'ETH',
+			{
+				mid: 3,
+				symbol: 'bdUSDC',
+				marketAddresses: {
+					1: '0x7749f9f3206A49d4c47b60db05716409dC3A4149',
+				},
+				underlyingAddresses: {
+					1: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
+				},
+				icon: 'assets/img/tokens/USDC.png',
+				coingeckoId: 'usd-coin',
+				underlyingDecimals: 6,
 			},
-			icon: 'assets/img/tokens/ETH.png',
-			coingeckoId: 'weth',
-			underlyingDecimals: 18,
-		},
-		{
-			mid: 2,
-			symbol: 'bdETH',
-			archived: true,
-			marketAddresses: {
-				1: '0xe7a52262C1934951207c5fc7A944A82D283C83e5',
-			},
-			underlyingAddresses: {
-				1: 'ETH',
-			},
-			icon: 'assets/img/tokens/ETH.png',
-			coingeckoId: 'weth',
-			underlyingDecimals: 18,
-		},
-		{
-			mid: 3,
-			symbol: 'bdUSDC',
-			marketAddresses: {
-				1: '0x7749f9f3206A49d4c47b60db05716409dC3A4149',
-			},
-			underlyingAddresses: {
-				1: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
-			},
-			icon: 'assets/img/tokens/USDC.png',
-			coingeckoId: 'usd-coin',
-			underlyingDecimals: 6,
-		},
-		{
-			mid: 5,
-			symbol: 'bdSTBL',
-			marketAddresses: {
-				1: '0xE0a55c00E6510F4F7df9af78b116B7f8E705cA8F',
-			},
-			underlyingAddresses: {
-				1: '0x5ee08f40b637417bcC9d2C51B62F4820ec9cF5D8',
-			},
-			icon: 'assets/img/tokens/bSTBL.png',
-			coingeckoId: 'dai',
-			underlyingDecimals: 18,
-		},
+			{
+				mid: 5,
+				symbol: 'bdSTBL',
+				marketAddresses: {
+					1: '0xE0a55c00E6510F4F7df9af78b116B7f8E705cA8F',
+				},
+				underlyingAddresses: {
+					1: '0x5ee08f40b637417bcC9d2C51B62F4820ec9cF5D8',
+				},
+				icon: 'assets/img/tokens/bSTBL.png',
+				coingeckoId: 'dai',
+				underlyingDecimals: 18,
+			},*/
 	],
 	baskets: [
 		/*{
@@ -223,7 +224,7 @@ export default {
         BAL: '#1E1E1E',
         aCRV: '#F7E103',
       },
-    },*/
+    },
 		{
 			nid: 1,
 			basketAddresses: {
@@ -246,30 +247,87 @@ export default {
 			},
 			desc: 'Low risk stablecoin basket',
 			swap: 'https://curve.fi/factory-crypto/61',
-		},
+		},*/
 	],
 	farms: [
 		// Active pools
 		{
-			pid: 0,
+			pid: 3,
 			lpAddresses: {
-				1: '0x9973bb0fe5f8df5de730776df09e946c74254fb3',
+				56: '0x97f6665ac6b2d7C3d5a2aD11d7a779787F617ce0',
 			},
 			tokenAddresses: {
-				1: '0x374cb8c27130e2c9e04f44303f3c8351b9de61c1',
+				56: '0x47dcc83a14ad53ed1f13d3cae8aa4115f07557c0',
 			},
 			tokenDecimals: 18,
-			name: 'BAO-ETH UNIV2',
-			symbol: 'UNIV2',
-			type: 'UNIV2',
-			tokenSymbol: 'BAO',
+			name: 'PNDA-BNB PNDAV2',
+			symbol: 'PNDAV2',
+			type: 'PNDAV2',
+			tokenSymbol: 'PNDA',
 			poolType: 'active',
-			iconA: 'BAO.png',
-			iconB: 'ETH.png',
-			refUrl: 'https://1inch.exchange/#/r/0x3bC3c8aF8CFe3dFC9bA1A57c7C3b653e3f6d6951/ETH/BAO',
+			iconA: 'pnda.png',
+			iconB: 'bnb.png',
+			refUrl: 'https://www.pandaswap.xyz/#/swap',
 			pairUrl: '#',
 		},
 		{
+			pid: 91,
+			lpAddresses: {
+				56: '0xa300526D664a0227c2fdFC0b423750E371Ab2ebD',
+			},
+			tokenAddresses: {
+				56: '0x47dcc83a14ad53ed1f13d3cae8aa4115f07557c0',
+			},
+			tokenDecimals: 18,
+			name: 'BAMBOO-BNB PNDAV2',
+			symbol: 'PNDAV2',
+			type: 'PNDAV2',
+			tokenSymbol: 'Bamboo',
+			poolType: 'active',
+			iconA: 'bamboo.png',
+			iconB: 'bnb.png',
+			refUrl: 'https://www.pandaswap.xyz/#/swap',
+			pairUrl: '#',
+		},
+		{
+			pid: 92,
+			lpAddresses: {
+				56: '0x999fd87aA406adB81809bab15681f655d8a049FF',
+			},
+			tokenAddresses: {
+				56: '0x47dcc83a14ad53ed1f13d3cae8aa4115f07557c0',
+			},
+			tokenDecimals: 18,
+			name: 'RHINO-BNB PNDAV2',
+			symbol: 'PNDAV2',
+			type: 'PNDAV2',
+			tokenSymbol: 'Rhino',
+			poolType: 'active',
+			iconA: 'rhino.png',
+			iconB: 'bnb.png',
+			refUrl: 'https://www.pandaswap.xyz/#/swap',
+			pairUrl: '#',
+		},
+		{
+			pid: 94,
+			lpAddresses: {
+				56: '0xEf8Af3ae4623E465124742E315Fc805a89e7146E',
+			},
+			tokenAddresses: {
+				56: '0x47dcc83a14ad53ed1f13d3cae8aa4115f07557c0',
+			},
+			tokenDecimals: 18,
+			name: 'PNDA-BNB (PANCAKE)',
+			symbol: 'PNDAV2',
+			type: 'PNDAV2',
+			tokenSymbol: 'PNDA',
+			poolType: 'active',
+			iconA: 'pnda.png',
+			iconB: 'bnb.png',
+			refUrl: 'https://www.pandaswap.xyz/#/swap',
+			pairUrl: '#',
+		},
+		/* {
 			pid: 200,
 			lpAddresses: {
 				1: '0x0eee7f7319013df1f24f5eaf83004fcf9cf49245',
@@ -306,6 +364,6 @@ export default {
 			iconB: 'USDC.png',
 			refUrl: 'https://1inch.exchange/#/r/0x3bC3c8aF8CFe3dFC9bA1A57c7C3b653e3f6d6951/ETH/BAO',
 			pairUrl: '#',
-		},
+		}, */
 	],
 } as Config
