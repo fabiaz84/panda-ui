@@ -4,14 +4,26 @@ import { fab } from '@fortawesome/free-brands-svg-icons'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { createWeb3ReactRoot, Web3ReactProvider } from '@web3-react/core'
 import fetcher from 'bao/lib/fetcher'
+// Bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { SpinnerLoader } from 'components/Loader'
+import Web3ReactManager from 'components/Web3ReactManager'
 import GlobalStyle from 'GlobalStyle'
-import React, { useCallback, useEffect, useState } from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import React, { ReactNode, Suspense, useCallback, useEffect, useState } from 'react'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import styled, { ThemeProvider } from 'styled-components'
 import { SWRConfig } from 'swr'
+import Web3 from 'web3'
+import { provider } from 'web3-core'
 import MobileMenu from './components/MobileMenu'
 import TopBar from './components/TopBar'
+import BaoProvider from './contexts/BaoProvider'
+import FarmsProvider from './contexts/Farms'
+{
+	/* import MarketsProvider from './contexts/Markets' */
+}
 import ModalsProvider from './contexts/Modals'
+import TransactionProvider from './contexts/Transactions'
 import theme from './theme'
 
 function getLibrary(provider: provider) {
@@ -20,11 +32,21 @@ function getLibrary(provider: provider) {
 
 const Web3ReactNetworkProvider = createWeb3ReactRoot('network')
 
-import Landing from './views/Landing'
-import { navItems } from 'views/navItems'
-import { Container } from 'react-bootstrap'
-
-library.add(fas, fab)
+{
+	/* const Markets = React.lazy(() => import('views/Markets')) */
+}
+{
+	/* const Market = React.lazy(() => import('views/Markets/Market')) */
+}
+{
+	/* const Ballast = React.lazy(() => import('views/Ballast')) */
+}
+const Baskets = React.lazy(() => import('views/Baskets'))
+const Basket = React.lazy(() => import('views/Baskets/Basket'))
+const Farms = React.lazy(() => import('views/Farms'))
+{
+	/* const NFT = React.lazy(() => import('views/NFT')) */
+}
 
 const App: React.FC = () => {
 	const [mobileMenu, setMobileMenu] = useState(false)
@@ -53,22 +75,18 @@ const App: React.FC = () => {
 	return (
 		<Providers isDarkMode={isDarkMode}>
 			<Router>
-				<TopBar isDarkMode={isDarkMode} toggleTheme={toggleTheme} onPresentMobileMenu={handlePresentMobileMenu} navItems={navItems} />
+				<TopBar isDarkMode={isDarkMode} toggleTheme={toggleTheme} onPresentMobileMenu={handlePresentMobileMenu} />
 				<MobileMenu onDismiss={handleDismissMobileMenu} visible={mobileMenu} />
-				<Switch>
-					<Route path='/' exact>
-						<Landing />
-					</Route>
-					<Route path='/NFT'>
-						<NFT />
-					</Route>
-					<Route path='/baskets' exact>
-						<Baskets />
-					</Route>
-					<Route path='/baskets/:id'>
-						<Basket />
-					</Route>
-				</Switch>
+				<Suspense fallback={<SpinnerLoader />}>
+					<Routes>
+						{/* <Route path='/' element={<Markets />} />*/}
+						{/*	<Route path='/markets/:marketId' element={<Market />} />*/}
+						{/*	<Route path='/ballast' element={<Ballast />} />*/}
+						<Route path='/farms' element={<Farms />} />
+						<Route path='/baskets' element={<Baskets />} />
+						<Route path='/baskets/:basketId' element={<Basket />} />
+					</Routes>
+				</Suspense>
 			</Router>
 		</Providers>
 	)
@@ -78,14 +96,28 @@ const Providers: React.FC<ProvidersProps> = ({ children, isDarkMode }: Providers
 	return (
 		<ThemeProvider theme={theme(isDarkMode)}>
 			<GlobalStyle />
-			<SWRConfig
-				value={{
-					fetcher,
-					refreshInterval: 300000,
-				}}
-			>
-				<ModalsProvider>{children}</ModalsProvider>
-			</SWRConfig>
+			<Web3ReactProvider getLibrary={getLibrary}>
+				<Web3ReactNetworkProvider getLibrary={getLibrary}>
+					<Web3ReactManager>
+						<BaoProvider>
+							{/* <MarketsProvider> */}
+							<FarmsProvider>
+								<TransactionProvider>
+									<SWRConfig
+										value={{
+											fetcher,
+											refreshInterval: 300000,
+										}}
+									>
+										<ModalsProvider>{children}</ModalsProvider>
+									</SWRConfig>
+								</TransactionProvider>
+							</FarmsProvider>
+							{/* </MarketsProvider> */}
+						</BaoProvider>
+					</Web3ReactManager>
+				</Web3ReactNetworkProvider>
+			</Web3ReactProvider>
 		</ThemeProvider>
 	)
 }
