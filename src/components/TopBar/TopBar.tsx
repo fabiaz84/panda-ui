@@ -5,16 +5,21 @@ import Logo from 'components/Logo'
 import React from 'react'
 import styled from 'styled-components'
 import { Button } from '../Button'
-import AccountButton from './components/AccountButton'
 import Nav from './components/Nav'
 
 interface TopBarProps {
 	isDarkMode: boolean
 	toggleTheme: () => void
-	onPresentMobileMenu: () => void
+	onPresentMobileMenu: () => void,
+	navItems: any
 }
 
-const TopBar: React.FC<TopBarProps> = ({ onPresentMobileMenu, isDarkMode, toggleTheme }) => {
+const TopBar: React.FC<TopBarProps> = ({
+	onPresentMobileMenu,
+	isDarkMode,
+	toggleTheme,
+	navItems
+}) => {
 	return (
 		<StyledTopBar>
 			<StyledTopBarInner>
@@ -22,10 +27,9 @@ const TopBar: React.FC<TopBarProps> = ({ onPresentMobileMenu, isDarkMode, toggle
 					<Logo />
 				</StyledLogoWrapper>
 				<StyledNavWrapper>
-					<Nav />
+					<Nav navItems={navItems} />
 				</StyledNavWrapper>
 				<StyledAccountButtonWrapper>
-					<AccountButton />
 					<StyledThemeButton>
 						<Button onClick={toggleTheme} aria-label='Dark Mode'>
 							<FontAwesomeIcon icon={isDarkMode ? faMoon : faSun} />
