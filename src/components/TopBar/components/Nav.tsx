@@ -1,24 +1,91 @@
 import React from 'react'
-//import {navItems} from "./navItems";
-import NavItem from "./NavItem";
-import {StyledNav} from "../topBarCss";
+import { NavLink } from 'react-router-dom'
+import styled from 'styled-components'
 
-interface NavItemsProps {
-	navItems: any
-}
-
-const Nav: React.FC<NavItemsProps> = ({navItems}) => {
+const Nav: React.FC = () => {
 	return (
 		<StyledNav>
-			{
-				navItems.map(
-					(navItem:any, index: number) => {
-						return <NavItem navItem={navItem} />
-					}
-				)
-			}
+			<StyledLink end to={{ pathname: '/farms' }}>
+				Home
+			</StyledLink>
+			{/* <StyledLink end to={{ pathname: '/ballast' }}>
+				Ballast
+	</StyledLink> */}
+			<StyledLink end to={{ pathname: '/baskets' }}>
+				Baskets
+			</StyledLink>
+			<StyledLink end to={{ pathname: '/farms' }}>
+				Farms
+			</StyledLink>
+			<StyledLink end to={{ pathname: '/bamboo' }}>
+				Bamboo
+			</StyledLink>
+			<StyledLink end to={{ pathname: '/rhino' }}>
+				Rhino
+			</StyledLink>
+			<StyledLink end to={{ pathname: '/swap' }}>
+				Swap
+			</StyledLink>
+			<StyledAbsoluteLink href='https://snapshot.org/#/pandaswapbsc.eth' target='_blank'>
+				Vote
+			</StyledAbsoluteLink>
+			<StyledAbsoluteLink href='https://gov.bao.finance' target='_blank'>
+				Forum
+			</StyledAbsoluteLink>
+			<StyledAbsoluteLink href='https://docs.bao.finance/franchises/panda' target='_blank'>
+				Docs
+			</StyledAbsoluteLink>
 		</StyledNav>
-	);
-};
+	)
+}
+
+const StyledNav = styled.nav`
+	align-items: center;
+	display: flex;
+`
+
+const StyledLink = styled(NavLink)`
+	transition-property: all;
+	transition-duration: 200ms;
+	transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+	font-family: 'Rubik', sans-serif;
+	color: ${props => props.theme.color.text[100]};
+	font-weight: ${props => props.theme.fontWeight.medium};
+	padding-left: ${props => props.theme.spacing[3]}px;
+	padding-right: ${props => props.theme.spacing[3]}px;
+	text-decoration: none;
+	&:hover {
+		color: ${props => props.theme.color.text[300]};
+	}
+	&.active {
+		color: ${props => props.theme.color.text[400]};
+	}
+	@media (max-width: ${props => props.theme.breakpoints.sm}px) {
+		padding-left: ${props => props.theme.spacing[2]}px;
+		padding-right: ${props => props.theme.spacing[2]}px;
+	}
+`
+
+const StyledAbsoluteLink = styled.a`
+	transition-property: all;
+	transition-duration: 200ms;
+	transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+	font-family: 'Rubik', sans-serif;
+	color: ${props => props.theme.color.text[100]};
+	font-weight: ${props => props.theme.fontWeight.medium};
+	padding-left: ${props => props.theme.spacing[3]}px;
+	padding-right: ${props => props.theme.spacing[3]}px;
+	text-decoration: none;
+	&:hover {
+		color: ${props => props.theme.color.text[300]};
+	}
+	&.active {
+		color: ${props => props.theme.color.text[400]};
+	}
+	@media (max-width: ${props => props.theme.breakpoints.sm}px) {
+		padding-left: ${props => props.theme.spacing[2]}px;
+		padding-right: ${props => props.theme.spacing[2]}px;
+	}
+`
 
 export default Nav
