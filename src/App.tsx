@@ -26,6 +26,8 @@ import ModalsProvider from './contexts/Modals'
 import TransactionProvider from './contexts/Transactions'
 import theme from './theme'
 
+import { navItems } from 'views/navItems'
+
 function getLibrary(provider: provider) {
 	return new Web3(provider)
 }
@@ -75,7 +77,7 @@ const App: React.FC = () => {
 	return (
 		<Providers isDarkMode={isDarkMode}>
 			<Router>
-				<TopBar isDarkMode={isDarkMode} toggleTheme={toggleTheme} onPresentMobileMenu={handlePresentMobileMenu} />
+				<TopBar isDarkMode={isDarkMode} toggleTheme={toggleTheme} onPresentMobileMenu={handlePresentMobileMenu} navItems={navItems} />
 				<MobileMenu onDismiss={handleDismissMobileMenu} visible={mobileMenu} />
 				<Suspense fallback={<SpinnerLoader />}>
 					<Routes>

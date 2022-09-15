@@ -8,7 +8,7 @@ const Logo: React.FC = () => {
 		<StyledLogo to='/'>
 			<img src={baoLogo} height={32} width={31} style={{ verticalAlign: 'middle' }} alt='Bao' />
 			<StyledText>
-				<TitleText>Bao Finance</TitleText>
+				<TitleText>PandaChef</TitleText>
 			</StyledText>
 		</StyledLogo>
 	)
