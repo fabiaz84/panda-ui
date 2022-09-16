@@ -1,4 +1,4 @@
-import baoLogo from 'assets/img/tokens/BAO.png'
+import baoLogo from 'assets/img/tokens/pnda.png'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'

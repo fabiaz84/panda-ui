@@ -152,3 +152,17 @@ export const StyledInfo = styled.h3`
 	margin: 0;
 	padding: 12px;
 `
+
+export const StyledInfoHome = styled.h3`
+	color: ${props => props.theme.color.text[100]};
+	text-align: center;
+	line-height: 160%;
+	font-size: 1.75rem;
+	font-weight: ${props => props.theme.fontWeight.regular};
+	margin: 0;
+	padding: 12px;
+	max-width: 960px;
+	align: center;
+	@media (max-width: 640px) {
+		text-align: left;
+`

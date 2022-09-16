@@ -14,10 +14,10 @@ const Baskets: React.FC = () => {
 	return (
 		<Page>
 			<Helmet>
-				<title>Bao | Baskets</title>
+				<title>Panda | Ponds</title>
 				<meta name='description' content='Diversified exposure to crypto with automated yield strategies.' />
 			</Helmet>
-			<PageHeader icon='' title='Bao Baskets' />
+			<PageHeader icon='' title='Panda Ponds' />
 			<Container>
 				<StyledInfo>
 					<div
@@ -28,9 +28,9 @@ const Baskets: React.FC = () => {
 							justifyContent: 'center',
 						}}
 					>
-						Bao Baskets allow users to get balanced exposure to digital assets on the Ethereum Network. Baskets are designed to be truly
-						set-and-forget, maximizing your returns at a fraction of the cost and effort. Baskets leverage automated strategies utilizing
-						staking, lending, and yield farming- No management or constant monitoring necessary!
+						Panda Ponds allow users to get balanced exposure to digital assets on the Binance Smart Chain network. Ponds are designed to be
+						truly set-and-forget, maximizing your returns at a fraction of the cost and effort. Ponds leverage automated strategies
+						utilizing staking, lending, and yield farming- No management or constant monitoring necessary!
 					</div>
 				</StyledInfo>
 				<Spacer size='md' />

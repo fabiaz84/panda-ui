@@ -25,7 +25,7 @@ import FarmsProvider from './contexts/Farms'
 import ModalsProvider from './contexts/Modals'
 import TransactionProvider from './contexts/Transactions'
 import theme from './theme'
-
+import Landing from '../src/views/Landing'
 import { navItems } from 'views/navItems'
 
 function getLibrary(provider: provider) {
@@ -81,7 +81,7 @@ const App: React.FC = () => {
 				<MobileMenu onDismiss={handleDismissMobileMenu} visible={mobileMenu} />
 				<Suspense fallback={<SpinnerLoader />}>
 					<Routes>
-						{/* <Route path='/' element={<Markets />} />*/}
+						<Route path='/' element={<Landing />} />
 						{/*	<Route path='/markets/:marketId' element={<Market />} />*/}
 						{/*	<Route path='/ballast' element={<Ballast />} />*/}
 						<Route path='/farms' element={<Farms />} />

@@ -36,7 +36,7 @@ const Basket: React.FC = () => {
 	return basket ? (
 		<Page>
 			<Helmet>
-				<title>Bao | {basketId} Basket</title>
+				<title>Panda | {basketId} Ponds</title>
 				<meta name='description' content={`Mint and redeem ${basketId}.`} />
 			</Helmet>
 			<Container>

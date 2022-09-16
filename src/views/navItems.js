@@ -10,6 +10,11 @@ export const navItems = [
 		link: '/farms',
 	},
 	{
+		title: 'Ponds',
+		type: 'link',
+		link: '/Baskets',
+	},
+	{
 		title: 'BambooBar',
 		type: 'link',
 		link: '/staking',
