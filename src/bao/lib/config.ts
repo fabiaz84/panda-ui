@@ -23,6 +23,8 @@ export default {
 		USDC: '0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d',
 		WETH: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
 		DEAD: '0x000000000000000000000000000000000000dead',
+		Bamboo: '0xEF88e0d265dDC8f5E725a4fDa1871F9FE21B11E2',
+		Rhino: '0xd2eca3cff5f09cfc9c425167d12f0a005fc97c8c',
 		/* //Synths
 		baoUSD: '0x7945b0A6674b175695e5d1D08aE1e6F13744Abb0',
 		// NFTs
@@ -55,6 +57,18 @@ export default {
 			56: {
 				address: '0x0567F2323251f0Aab15c8dFb1967E4e8A7D42aeE',
 				abi: 'chainoracle.json',
+			},
+		},
+		bambooBar: {
+			56: {
+				address: '0xe1a2CD535C4e7d9C2C187e529f9f491cceA41e07',
+				abi: 'bamboobar.json',
+			},
+		},
+		rhinoSwap: {
+			56: {
+				address: '0x745c8E1c0315162C33408454b48E53C9F178eB68 ',
+				abi: 'rhinoswap.json',
 			},
 		},
 		/* // Hard Synths

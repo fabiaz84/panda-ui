@@ -25,6 +25,7 @@ const Landing: React.FC = () => {
 						<div>PandaSwap is back! New UI and soon the release of Panda Ponds.</div>
 						<div>We are looking into releasing markets, bringing hard synths to Panda!</div>
 						<div>Look below for all the recent updates or the items still to come.</div>
+						<div>We are still looking for contributors, visit us on the Bao Discord #panda.</div>
 						<Spacer />
 					</StyledInfoHome>
 				</StyledWrapper>
