@@ -17,9 +17,9 @@ import styled from 'styled-components'
 import Multicall from 'utils/multicall'
 import { decimate, getDisplayBalance } from 'utils/numberFormat'
 import { AssetStack } from 'views/Markets/components/styles'
-import BallastButton from './BambooButton'
+import BambooButton from './BambooButton'
 
-const BallastSwapper: React.FC = () => {
+const BambooSwapper: React.FC = () => {
 	const [swapDirection, setSwapDirection] = useState(false) // false = PNDA->Bamboo | true = Bamboo->PNDA
 	const [inputVal, setInputVal] = useState('')
 
@@ -86,7 +86,7 @@ const BallastSwapper: React.FC = () => {
 			</SwapDirection>
 			{swapDirection ? pndaInput : bambooInput}
 			<br />
-			<BallastButton
+			<BambooButton
 				swapDirection={swapDirection}
 				inputVal={inputVal}
 				maxValues={{ buy: decimate(pndaBalance), sell: decimate(bambooBalance) }}
@@ -154,4 +154,4 @@ const BallastLabel = styled.label`
 	}
 `
 
-export default BallastSwapper
+export default BambooSwapper
