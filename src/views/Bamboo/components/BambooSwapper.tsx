@@ -1,7 +1,7 @@
 import { faLongArrowAltRight, faShip, faSync } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import baoUSDIcon from 'assets/img/tokens/bUSD.png'
-import daiIcon from 'assets/img/tokens/DAI.png'
+import bambooIcon from 'assets/img/tokens/bamboo.png'
+import pndaIcon from 'assets/img/tokens/pnda.png'
 import Config from 'bao/lib/config'
 import BigNumber from 'bignumber.js'
 import { IconFlex } from 'components/Icon'
@@ -20,32 +20,26 @@ import { AssetStack } from 'views/Markets/components/styles'
 import BallastButton from './BambooButton'
 
 const BallastSwapper: React.FC = () => {
-	const bao = useBao()
-	const { transactions } = useTransactionProvider()
-	const [swapDirection, setSwapDirection] = useState(false) // false = DAI->baoUSD | true = baoUSD->DAI
+	const [swapDirection, setSwapDirection] = useState(false) // false = PNDA->Bamboo | true = Bamboo->PNDA
 	const [inputVal, setInputVal] = useState('')
 
-	const daiBalance = useTokenBalance(Config.addressMap.DAI)
-	const baoUSDBalance = useTokenBalance(Config.addressMap.baoUSD)
+	const pndaBalance = useTokenBalance(Config.addressMap.PNDA)
+	const bambooBalance = useTokenBalance(Config.addressMap.Bamboo)
 
-	const daiInput = (
+	const pndaInput = (
 		<>
 			<BallastLabel>
-				<FontAwesomeIcon icon={faLongArrowAltRight} /> Balance: {getDisplayBalance(daiBalance).toString()} DAI
+				<FontAwesomeIcon icon={faLongArrowAltRight} /> Balance: {getDisplayBalance(pndaBalance).toString()} PNDA
 			</BallastLabel>
 			<BalanceInput
-				onMaxClick={() => setInputVal(decimate(daiBalance).toString())}
+				onMaxClick={() => setInputVal(decimate(pndaBalance).toString())}
 				onChange={(e: { currentTarget: { value: React.SetStateAction<string> } }) => setInputVal(e.currentTarget.value)}
-				value={
-					swapDirection && fees && !new BigNumber(inputVal).isNaN()
-						? new BigNumber(inputVal).times(new BigNumber(1).minus(fees['sell'].div(fees['denominator']))).toString()
-						: inputVal
-				}
+				value={swapDirection && !new BigNumber(inputVal).isNaN() ? new BigNumber(inputVal).toString() : inputVal}
 				disabled={swapDirection}
 				label={
 					<AssetStack>
 						<IconFlex>
-							<img src={daiIcon} />
+							<img src={pndaIcon} />
 						</IconFlex>
 					</AssetStack>
 				}
@@ -53,24 +47,20 @@ const BallastSwapper: React.FC = () => {
 		</>
 	)
 
-	const baoUSDInput = (
+	const bambooInput = (
 		<>
 			<BallastLabel>
-				<FontAwesomeIcon icon={faLongArrowAltRight} /> Balance: {getDisplayBalance(baoUSDBalance).toString()} BaoUSD
+				<FontAwesomeIcon icon={faLongArrowAltRight} /> Balance: {getDisplayBalance(bambooBalance).toString()} Bamboo
 			</BallastLabel>
 			<BalanceInput
-				onMaxClick={() => setInputVal(decimate(baoUSDBalance).toString())}
+				onMaxClick={() => setInputVal(decimate(bambooBalance).toString())}
 				onChange={(e: { currentTarget: { value: React.SetStateAction<string> } }) => setInputVal(e.currentTarget.value)}
-				value={
-					!swapDirection && fees && !new BigNumber(inputVal).isNaN()
-						? new BigNumber(inputVal).times(new BigNumber(1).minus(fees['buy'].div(fees['denominator']))).toString()
-						: inputVal
-				}
+				value={!swapDirection && !new BigNumber(inputVal).isNaN() ? new BigNumber(inputVal).toString() : inputVal}
 				disabled={!swapDirection}
 				label={
 					<AssetStack>
 						<IconFlex>
-							<img src={baoUSDIcon} />
+							<img src={bambooIcon} />
 						</IconFlex>
 					</AssetStack>
 				}
@@ -81,26 +71,25 @@ const BallastSwapper: React.FC = () => {
 	return (
 		<BallastSwapCard>
 			<h2 style={{ textAlign: 'center' }}>
-				<Tooltipped content='The Ballast is used to mint BaoUSD with DAI or to redeem DAI for BaoUSD at a 1:1 rate (not including fees).'>
+				<Tooltipped content='The BambooBar is used to stake PNDA for Bamboo.'>
 					<a>
 						<FontAwesomeIcon icon={faShip} />
 					</a>
 				</Tooltipped>
 			</h2>
-			{swapDirection ? baoUSDInput : daiInput}
+			{swapDirection ? bambooInput : pndaInput}
 			<SwapDirection>
 				<SwapDirectionBadge pill onClick={() => setSwapDirection(!swapDirection)}>
 					<FontAwesomeIcon icon={faSync} />
 					{' - '}
-					Fee: {fees ? `${fees[swapDirection ? 'sell' : 'buy'].div(fees['denominator']).times(100).toString()}%` : <SpinnerLoader />}
 				</SwapDirectionBadge>
 			</SwapDirection>
-			{swapDirection ? daiInput : baoUSDInput}
+			{swapDirection ? pndaInput : bambooInput}
 			<br />
 			<BallastButton
 				swapDirection={swapDirection}
 				inputVal={inputVal}
-				maxValues={{ buy: decimate(daiBalance), sell: decimate(baoUSDBalance) }}
+				maxValues={{ buy: decimate(pndaBalance), sell: decimate(bambooBalance) }}
 			/>
 		</BallastSwapCard>
 	)

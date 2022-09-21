@@ -17,7 +17,7 @@ export const navItems = [
 	{
 		title: 'BambooBar',
 		type: 'link',
-		link: '/staking',
+		link: '/Bamboo',
 	},
 	{
 		title: 'Rhino',
