@@ -31,7 +31,7 @@ const BambooButton: React.FC<BambooButtonProps> = ({ swapDirection, inputVal, ma
 				return handleTx(approvev2(tokenContract, BambooContract, account), 'Bar: Approve Bamboo')
 			}
 
-			handleTx(BambooContract.methods.sell(exponentiate(inputVal).toString()).send({ from: account }), 'Bar: Swap Bamboo to PNDA')
+			handleTx(BambooContract.methods.leave(exponentiate(inputVal).toString()).send({ from: account }), 'Bar: Swap Bamboo to PNDA')
 		} else {
 			// DAI->baoUSD
 			if (!inputAApproval.gt(0)) {
@@ -39,7 +39,7 @@ const BambooButton: React.FC<BambooButtonProps> = ({ swapDirection, inputVal, ma
 				return handleTx(approvev2(tokenContract, BambooContract, account), 'Bar: Approve PNDA')
 			}
 
-			handleTx(BambooContract.methods.buy(exponentiate(inputVal).toString()).send({ from: account }), 'Bar: Swap PNDA to Bamboo')
+			handleTx(BambooContract.methods.enter(exponentiate(inputVal).toString()).send({ from: account }), 'Bar: Swap PNDA to Bamboo')
 		}
 	}
 
@@ -56,9 +56,9 @@ const BambooButton: React.FC<BambooButtonProps> = ({ swapDirection, inputVal, ma
 			)
 		} else {
 			if (swapDirection) {
-				return inputBApproval.gt(0) ? 'Swap Bamboo for PNDA' : 'Approve Bamboo'
+				return inputBApproval.gt(0) ? 'Unstake Bamboo and receive PNDA' : 'Approve Bamboo'
 			} else {
-				return inputAApproval.gt(0) ? 'Swap PNDA for Bamboo' : 'Approve PNDA'
+				return inputAApproval.gt(0) ? 'Stake PNDA and receive Bamboo' : 'Approve PNDA'
 			}
 		}
 	}
