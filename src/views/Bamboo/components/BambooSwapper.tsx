@@ -19,6 +19,8 @@ import { decimate, getDisplayBalance } from 'utils/numberFormat'
 import { AssetStack } from 'views/Markets/components/styles'
 import BambooButton from './BambooButton'
 
+const ZERO = String(0)
+
 const BambooSwapper: React.FC = () => {
 	const [swapDirection, setSwapDirection] = useState(false) // false = PNDA->Bamboo | true = Bamboo->PNDA
 	const [inputVal, setInputVal] = useState('')
@@ -34,7 +36,7 @@ const BambooSwapper: React.FC = () => {
 			<BalanceInput
 				onMaxClick={() => setInputVal(decimate(pndaBalance).toString())}
 				onChange={(e: { currentTarget: { value: React.SetStateAction<string> } }) => setInputVal(e.currentTarget.value)}
-				value={swapDirection && !new BigNumber(inputVal).isNaN() ? new BigNumber(inputVal).toString() : inputVal}
+				value={swapDirection && !new BigNumber(inputVal).isNaN() ? new BigNumber(ZERO).toString() : inputVal}
 				disabled={swapDirection}
 				label={
 					<AssetStack>
@@ -55,7 +57,7 @@ const BambooSwapper: React.FC = () => {
 			<BalanceInput
 				onMaxClick={() => setInputVal(decimate(bambooBalance).toString())}
 				onChange={(e: { currentTarget: { value: React.SetStateAction<string> } }) => setInputVal(e.currentTarget.value)}
-				value={!swapDirection && !new BigNumber(inputVal).isNaN() ? new BigNumber(inputVal).toString() : inputVal}
+				value={!swapDirection && !new BigNumber(inputVal).isNaN() ? new BigNumber(ZERO).toString() : inputVal}
 				disabled={!swapDirection}
 				label={
 					<AssetStack>
@@ -73,7 +75,7 @@ const BambooSwapper: React.FC = () => {
 			<h2 style={{ textAlign: 'center' }}>
 				<Tooltipped content='The BambooBar is used to stake PNDA for Bamboo.'>
 					<a>
-						<FontAwesomeIcon icon={faShip} />
+						<img width='90' height='90' src={pndaIcon} />
 					</a>
 				</Tooltipped>
 			</h2>

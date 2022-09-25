@@ -157,7 +157,7 @@ export const StyledInfoHome = styled.h3`
 	color: ${props => props.theme.color.text[100]};
 	text-align: center;
 	line-height: 160%;
-	font-size: 1.75rem;
+	font-size: 1.25rem;
 	font-weight: ${props => props.theme.fontWeight.regular};
 	margin: 0;
 	padding: 12px;

@@ -61,7 +61,7 @@ export default {
 		},
 		bambooBar: {
 			56: {
-				address: '0xe1a2CD535C4e7d9C2C187e529f9f491cceA41e07',
+				address: '0xEF88e0d265dDC8f5E725a4fDa1871F9FE21B11E2',
 				abi: 'bamboobar.json',
 			},
 		},

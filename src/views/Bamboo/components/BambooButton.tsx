@@ -17,13 +17,13 @@ const BambooButton: React.FC<BambooButtonProps> = ({ swapDirection, inputVal, ma
 	const { account } = useWeb3React()
 	const { pendingTx, handleTx } = useTransactionHandler()
 
-	const inputAApproval = useAllowancev2(Config.addressMap.PNDA, Config.contracts.bamboo[Config.networkId].address)
-	const inputBApproval = useAllowancev2(Config.addressMap.Bamboo, Config.contracts.bamboo[Config.networkId].address)
+	const inputAApproval = useAllowancev2(Config.addressMap.PNDA, Config.contracts.bambooBar[Config.networkId].address)
+	const inputBApproval = useAllowancev2(Config.addressMap.Bamboo, Config.contracts.bambooBar[Config.networkId].address)
 
 	const handleClick = async () => {
 		if (!bao) return
 
-		const BambooContract = bao.getContract('Bamboo')
+		const BambooContract = bao.getContract('bambooBar')
 		if (swapDirection) {
 			// PNDA->Bamboo
 			if (!inputBApproval.gt(0)) {

@@ -204,6 +204,10 @@ export const getBaoSupply = async (bao: Bao) => {
 	return new BigNumber(await bao.getContract('bao').methods.totalSupply().call())
 }
 
+export const getBambooSupply = async (bao: Bao) => {
+	return new BigNumber(await bao.getContract('bambooBar').methods.totalSupply().call())
+}
+
 export const getReferrals = async (masterChefContract: Contract, account: string): Promise<string> => {
 	return await masterChefContract.methods.getGlobalRefAmount(account).call()
 }
