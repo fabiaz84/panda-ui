@@ -3,19 +3,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import bambooIcon from 'assets/img/tokens/bamboo.png'
 import pndaIcon from 'assets/img/tokens/pnda.png'
 import Config from 'bao/lib/config'
+import { getBambooSupply } from 'bao/utils'
 import BigNumber from 'bignumber.js'
 import { IconFlex } from 'components/Icon'
 import { BalanceInput } from 'components/Input'
 import { SpinnerLoader } from 'components/Loader'
 import Tooltipped from 'components/Tooltipped'
 import useBao from 'hooks/base/useBao'
+import usePandaBalance from 'hooks/base/usePandaBalance'
 import useTokenBalance from 'hooks/base/useTokenBalance'
 import useTransactionProvider from 'hooks/base/useTransactionProvider'
 import React, { useCallback, useEffect, useState } from 'react'
 import { Badge, Card } from 'react-bootstrap'
 import styled from 'styled-components'
 import Multicall from 'utils/multicall'
-import { decimate, getDisplayBalance } from 'utils/numberFormat'
+import { decimate, exponentiate, getDisplayBalance } from 'utils/numberFormat'
 import { AssetStack } from 'views/Markets/components/styles'
 import BambooButton from './BambooButton'
 
@@ -28,15 +30,38 @@ const BambooSwapper: React.FC = () => {
 	const pndaBalance = useTokenBalance(Config.addressMap.PNDA)
 	const bambooBalance = useTokenBalance(Config.addressMap.Bamboo)
 
+	const [totalSupply, setTotalSupply] = useState<BigNumber>()
+	const bao = useBao()
+	const pandaBalance = usePandaBalance(bao && bao.getContract('bao').options.address)
+
+	useEffect(() => {
+		const fetchTotalSupply = async () => {
+			const supply = await getBambooSupply(bao)
+			setTotalSupply(supply)
+		}
+
+		if (bao) fetchTotalSupply()
+	}, [bao, setTotalSupply])
+
+	const bambooRate = new BigNumber(pandaBalance)
+	const pandaRate = new BigNumber(totalSupply)
+	const conversionAlong = new BigNumber(bambooRate.dividedBy(pandaRate)).toFixed(18)
+	const conversionBlong = new BigNumber(pandaRate.dividedBy(bambooRate)).toFixed(18)
+	const conversionAshort = new BigNumber(bambooRate.dividedBy(pandaRate)).toFixed(4)
+	const conversionBshort = new BigNumber(pandaRate.dividedBy(bambooRate)).toFixed(4)
+
 	const pndaInput = (
 		<>
 			<BallastLabel>
 				<FontAwesomeIcon icon={faLongArrowAltRight} /> Balance: {getDisplayBalance(pndaBalance).toString()} PNDA
+				<span>Conversion rate: {conversionBshort ? conversionBshort : <SpinnerLoader />} </span>
 			</BallastLabel>
 			<BalanceInput
 				onMaxClick={() => setInputVal(decimate(pndaBalance).toString())}
 				onChange={(e: { currentTarget: { value: React.SetStateAction<string> } }) => setInputVal(e.currentTarget.value)}
-				value={swapDirection && !new BigNumber(inputVal).isNaN() ? new BigNumber(ZERO).toString() : inputVal}
+				value={
+					swapDirection && !new BigNumber(inputVal).isNaN() ? new BigNumber(inputVal).multipliedBy(conversionAlong).toFixed(18) : inputVal
+				}
 				disabled={swapDirection}
 				label={
 					<AssetStack>
@@ -53,11 +78,14 @@ const BambooSwapper: React.FC = () => {
 		<>
 			<BallastLabel>
 				<FontAwesomeIcon icon={faLongArrowAltRight} /> Balance: {getDisplayBalance(bambooBalance).toString()} Bamboo
+				<span>Conversion rate: {conversionAshort ? conversionAshort : <SpinnerLoader />} </span>
 			</BallastLabel>
 			<BalanceInput
 				onMaxClick={() => setInputVal(decimate(bambooBalance).toString())}
 				onChange={(e: { currentTarget: { value: React.SetStateAction<string> } }) => setInputVal(e.currentTarget.value)}
-				value={!swapDirection && !new BigNumber(inputVal).isNaN() ? new BigNumber(ZERO).toString() : inputVal}
+				value={
+					!swapDirection && !new BigNumber(inputVal).isNaN() ? new BigNumber(inputVal).multipliedBy(conversionBlong).toFixed(18) : inputVal
+				}
 				disabled={!swapDirection}
 				label={
 					<AssetStack>
