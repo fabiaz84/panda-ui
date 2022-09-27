@@ -9,6 +9,7 @@ import GraphUtil from 'utils/graph'
 import Multicall from 'utils/multicall'
 import { decimate } from 'utils/numberFormat'
 import { AbiItem } from 'web3-utils'
+import Coingecko from 'utils/coingecko'
 
 export const fetchLPInfo = async (farms: any[], multicall: MC, bao: Bao) => {
 	const results = Multicall.parseCallResults(
@@ -78,8 +79,9 @@ const useAllFarmTVL = (bao: Bao, multicall: MC) => {
 
 	const fetchAllFarmTVL = useCallback(async () => {
 		const lps: any = await fetchLPInfo(Config.farms, multicall, bao)
-		const wethPrice = await GraphUtil.getPrice(Config.addressMap.WETH)
-		const tokenPrices = await GraphUtil.getPriceFromPairMultiple(wethPrice, [Config.addressMap.USDC])
+		const prices = await Coingecko.getPricesByCoinApiIdsAndCurrency(['binancecoin', 'usd-coin'], 'usd')
+		const wethPrice = new BigNumber(prices['binancecoin']['usd'])
+		const tokenPrices = new BigNumber(prices['usd-coin']['usd'])
 
 		const tvls: any[] = []
 		let _tvl = new BigNumber(0)
