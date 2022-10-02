@@ -6,7 +6,7 @@ import useBao from 'hooks/base/useBao'
 import { StatWrapper, UserStat, UserStatsContainer, UserStatsWrapper } from 'components/Stats'
 import { Row } from 'react-bootstrap'
 import { getBambooSupply } from 'bao/utils'
-import { decimate, exponentiate, getDisplayBalance, truncateNumber } from 'utils/numberFormat'
+import { getDisplayBalance, truncateNumber } from 'utils/numberFormat'
 
 const BambooInfo: React.FC = () => {
 	const [totalSupply, setTotalSupply] = useState<BigNumber>()

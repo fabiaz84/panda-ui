@@ -28,6 +28,7 @@ import theme from './theme'
 import Landing from '../src/views/Landing'
 import { navItems } from 'views/navItems'
 import Bamboo from 'views/Bamboo'
+import Rhino from 'views/Rhino'
 
 function getLibrary(provider: provider) {
 	return new Web3(provider)
@@ -84,6 +85,7 @@ const App: React.FC = () => {
 					<Routes>
 						<Route path='/' element={<Landing />} />
 						<Route path='/Bamboo' element={<Bamboo />} />
+						<Route path='/Rhino' element={<Rhino />} />
 						{/*	<Route path='/markets/:marketId' element={<Market />} />*/}
 						{/*	<Route path='/ballast' element={<Ballast />} />*/}
 						<Route path='/farms' element={<Farms />} />

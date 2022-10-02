@@ -65,12 +65,18 @@ export default {
 				abi: 'bamboobar.json',
 			},
 		},
-		/* rhinoSwap: {
+		rhinoSwap: {
 			56: {
-				address: '0x745c8E1c0315162C33408454b48E53C9F178eB6',
+				address: '0x745c8E1c0315162C33408454b48E53C9F178eB68',
 				abi: 'rhinoswap.json',
 			},
-		}, */
+		},
+		rhino: {
+			56: {
+				address: '0xd2eca3cff5f09cfc9c425167d12f0a005fc97c8c',
+				abi: 'rhino.json',
+			},
+		},
 		/* // Hard Synths
 		comptroller: {
 			1: {

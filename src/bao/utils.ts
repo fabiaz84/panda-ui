@@ -322,3 +322,21 @@ export const mintBaoSwap = async (nftContract: Contract, account: string): Promi
 
 export const getNFTWhitelistClaimed = async (nftContract: Contract, account: string) =>
 	await nftContract.methods.whitelistClaimed(account).call()
+
+export const getRhinoContract = (bao: Bao): Contract => {
+	return bao && bao.contracts && bao.getContract('rhino')
+}
+
+export const getRhinoStakingContract = (bao: Bao): Contract => {
+	return bao && bao.contracts && bao.getContract('rhinoSwap')
+}
+
+export const getWithdrawableBalance = async (rhinoStakingContract: Contract, account: string, tokenAddress: string): Promise<BigNumber> => {
+	try {
+		const amount = await rhinoStakingContract.methods.withdrawableBalance(account, tokenAddress).call()
+		console.log('withdrawableBalance', amount)
+		return new BigNumber(amount)
+	} catch {
+		return new BigNumber(0)
+	}
+}

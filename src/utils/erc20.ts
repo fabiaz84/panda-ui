@@ -12,6 +12,10 @@ export const getCreamContract = (bao: Bao, address: string) => {
 	return bao && bao.web3 && new bao.web3.eth.Contract(CreamABI as unknown as AbiItem, address)
 }
 
+export const getRhinoSwapContract = (bao: Bao, address: string) => {
+	return bao && bao.web3 && new bao.web3.eth.Contract(CreamABI as unknown as AbiItem, address)
+}
+
 export const getAllowance = async (contract: Contract, owner: string, spender: string): Promise<string> => {
 	try {
 		return await contract.methods.allowance(owner, spender).call()
