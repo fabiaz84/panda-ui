@@ -10,6 +10,7 @@ import { PoolType } from 'contexts/Farms/types'
 import useBao from 'hooks/base/useBao'
 import useAllFarmTVL from 'hooks/farms/useAllFarmTVL'
 import useFarms from 'hooks/farms/useFarms'
+import usePandaLPBalance from 'hooks/base/usePandaLPBalance'
 import React, { useEffect, useState } from 'react'
 import { Col, Container, Form, Row } from 'react-bootstrap'
 import styled from 'styled-components'
@@ -28,6 +29,8 @@ export const FarmList: React.FC = () => {
 	const [farms] = useFarms()
 	const farmsTVL = useAllFarmTVL(bao, bao && bao.multicall)
 	const { account } = useWeb3React()
+	const pandaBalance = usePandaLPBalance(bao && bao.getContract('bao').options.address)
+	const bnbBalance = usePandaLPBalance(bao && bao.getContract('weth').options.address)
 
 	const [baoPrice, setBaoPrice] = useState<BigNumber | undefined>()
 	const [pools, setPools] = useState<any | undefined>({
@@ -44,10 +47,14 @@ export const FarmList: React.FC = () => {
 	const [archived, showArchived] = useState(false)
 
 	useEffect(() => {
-		GraphUtil.getPrice(Config.addressMap.WETH).then(async wethPrice => {
-			const baoPrice = await GraphUtil.getPriceFromPair(wethPrice, Config.contracts.bao[Config.networkId].address)
-			setBaoPrice(baoPrice)
+		if (!bao) return
+		fetch('https://api.coingecko.com/api/v3/simple/price?ids=binancecoin&vs_currencies=usd').then(async res => {
+			setBaoPrice(new BigNumber((await res.json())['binancecoin'].usd))
 		})
+
+		const pandaRate = new BigNumber(pandaBalance)
+		const bnbRate = new BigNumber(bnbBalance)
+		const baoUSDPrice = bnbRate.times(baoPrice).div(pandaRate)
 
 		const _pools: any = {
 			[PoolType.ACTIVE]: [],
@@ -95,8 +102,8 @@ export const FarmList: React.FC = () => {
 							.div(decimate(tvlInfo.lpStaked))
 							.times(tvlInfo.tvl),
 						apy:
-							baoPrice && farmsTVL
-								? baoPrice
+							baoUSDPrice && farmsTVL
+								? baoUSDPrice
 										.times(BLOCKS_PER_YEAR)
 										.times(new BigNumber(result.masterChef[i].values[0].hex).div(10 ** 18))
 										.div(tvlInfo.tvl)

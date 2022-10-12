@@ -5,11 +5,13 @@ import { SpinnerLoader } from 'components/Loader'
 import { StatWrapper, UserStat, UserStatsContainer, UserStatsWrapper } from 'components/Stats'
 import useBao from 'hooks/base/useBao'
 import useTokenBalance from 'hooks/base/useTokenBalance'
+import usePandaLPBalance from 'hooks/base/usePandaLPBalance'
 import useAllEarnings from 'hooks/farms/useAllEarnings'
 import useLockedEarnings from 'hooks/farms/useLockedEarnings'
 import React, { Fragment, useEffect, useState } from 'react'
 import { Row } from 'react-bootstrap'
 import { getDisplayBalance, truncateNumber } from 'utils/numberFormat'
+import Coingecko from 'utils/coingecko'
 
 const PendingRewards: React.FC = () => {
 	const allEarnings = useAllEarnings()
@@ -28,6 +30,8 @@ const Balances: React.FC = () => {
 	const { account } = useWeb3React()
 	const [baoPrice, setBaoPrice] = useState<BigNumber | undefined>()
 	const locks = useLockedEarnings()
+	const pandaBalance = usePandaLPBalance(bao && bao.getContract('bao').options.address)
+	const bnbBalance = usePandaLPBalance(bao && bao.getContract('weth').options.address)
 
 	useEffect(() => {
 		const fetchTotalSupply = async () => {
@@ -40,10 +44,14 @@ const Balances: React.FC = () => {
 
 	useEffect(() => {
 		if (!bao) return
-		fetch('https://api.coingecko.com/api/v3/simple/price?ids=bao-finance&vs_currencies=usd').then(async res => {
-			setBaoPrice(new BigNumber((await res.json())['bao-finance'].usd))
+		fetch('https://api.coingecko.com/api/v3/simple/price?ids=binancecoin&vs_currencies=usd').then(async res => {
+			setBaoPrice(new BigNumber((await res.json())['binancecoin'].usd))
 		})
 	}, [bao, setBaoPrice])
+
+	const pandaRate = new BigNumber(pandaBalance)
+	const bnbRate = new BigNumber(bnbBalance)
+	const baoUSDPrice = bnbRate.times(baoPrice).div(pandaRate)
 
 	return (
 		<>
@@ -85,7 +93,7 @@ const Balances: React.FC = () => {
 						<StatWrapper>
 							<UserStat>
 								<h1>PNDA Price</h1>
-								{baoPrice ? `$${getDisplayBalance(baoPrice, 0)}` : <SpinnerLoader />}
+								{baoUSDPrice ? `$${getDisplayBalance(baoUSDPrice, 0)}` : <SpinnerLoader />}
 							</UserStat>
 						</StatWrapper>
 					</UserStatsWrapper>
