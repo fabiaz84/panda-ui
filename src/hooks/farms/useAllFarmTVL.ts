@@ -96,12 +96,12 @@ const useAllFarmTVL = (bao: Bao, multicall: MC) => {
 				let token, tokenPrice, specialPair
 				if (
 					lpInfo.tokens[0].address.toLowerCase() === Config.addressMap.BAO.toLowerCase() &&
-					lpInfo.tokens[1].address.toLowerCase() === Config.addressMap.USDC.toLowerCase()
+					lpInfo.tokens[1].address.toLowerCase() === Config.addressMap.WETH.toLowerCase()
 				) {
 					// BAO-USDC pair
 					token = lpInfo.tokens[1]
 					specialPair = true
-				} else token = lpInfo.tokens[1]
+				} else token = lpInfo.tokens[0]
 
 				if (token.address.toLowerCase() === Config.addressMap.WETH.toLowerCase())
 					// *-wETH pair
