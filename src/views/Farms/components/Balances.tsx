@@ -5,7 +5,7 @@ import { SpinnerLoader } from 'components/Loader'
 import { StatWrapper, UserStat, UserStatsContainer, UserStatsWrapper } from 'components/Stats'
 import useBao from 'hooks/base/useBao'
 import useTokenBalance from 'hooks/base/useTokenBalance'
-import usePandaLPBalance from 'hooks/base/usePandaLPBalance'
+import usePandaBalance from 'hooks/base/usePandaBalance'
 import useAllEarnings from 'hooks/farms/useAllEarnings'
 import useLockedEarnings from 'hooks/farms/useLockedEarnings'
 import React, { Fragment, useEffect, useState } from 'react'
@@ -30,8 +30,10 @@ const Balances: React.FC = () => {
 	const { account } = useWeb3React()
 	const [baoPrice, setBaoPrice] = useState<BigNumber | undefined>()
 	const locks = useLockedEarnings()
-	const pandaBalance = usePandaLPBalance(bao && bao.getContract('bao').options.address)
-	const bnbBalance = usePandaLPBalance(bao && bao.getContract('weth').options.address)
+	const userAddress = '0x97f6665ac6b2d7C3d5a2aD11d7a779787F617ce0'
+
+	const pandaBalance = usePandaBalance(bao && bao.getContract('bao').options.address, userAddress)
+	const bnbBalance = usePandaBalance(bao && bao.getContract('weth').options.address, userAddress)
 
 	useEffect(() => {
 		const fetchTotalSupply = async () => {
@@ -40,14 +42,14 @@ const Balances: React.FC = () => {
 		}
 
 		if (bao) fetchTotalSupply()
-	}, [bao, setTotalSupply])
+	}, [])
 
 	useEffect(() => {
 		if (!bao) return
-		fetch('https://api.coingecko.com/api/v3/simple/price?ids=binancecoin&vs_currencies=usd').then(async res => {
-			setBaoPrice(new BigNumber((await res.json())['binancecoin'].usd))
+		Coingecko.getPricesByCoinApiIdsAndCurrency(['binancecoin'], 'usd').then(async res => {
+			setBaoPrice(new BigNumber((await res)['binancecoin'].usd))
 		})
-	}, [bao, setBaoPrice])
+	}, [])
 
 	const pandaRate = new BigNumber(pandaBalance)
 	const bnbRate = new BigNumber(bnbBalance)

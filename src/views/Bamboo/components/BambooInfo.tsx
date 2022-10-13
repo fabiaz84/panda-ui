@@ -11,7 +11,8 @@ import { getDisplayBalance, truncateNumber } from 'utils/numberFormat'
 const BambooInfo: React.FC = () => {
 	const [totalSupply, setTotalSupply] = useState<BigNumber>()
 	const bao = useBao()
-	const pandaBalance = usePandaBalance(bao && bao.getContract('bao').options.address)
+	const userAddress = '0xEF88e0d265dDC8f5E725a4fDa1871F9FE21B11E2'
+	const pandaBalance = usePandaBalance(bao && bao.getContract('bao').options.address, userAddress)
 
 	useEffect(() => {
 		const fetchTotalSupply = async () => {
