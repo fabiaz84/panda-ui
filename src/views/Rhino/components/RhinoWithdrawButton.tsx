@@ -6,7 +6,7 @@ import BigNumber from 'bignumber.js'
 import { SubmitButton } from 'components/Button/Button'
 import useBao from 'hooks/base/useBao'
 import useTransactionHandler from 'hooks/base/useTransactionHandler'
-import React, { useMemo } from 'react'
+import React, { useState } from 'react'
 import { decimate, exponentiate } from 'utils/numberFormat'
 import { useRhinoSwapWithdrawableBalance } from '../../../hooks/base/useWithdrawableBalance'
 
@@ -17,19 +17,25 @@ const RhinoWithdrawButton: React.FC<RhinoWithdrawButtonProps> = ({ swapDirection
 	const { account } = useWeb3React()
 	const { pendingTx, handleTx } = useTransactionHandler()
 	const withdrawableBalance = useRhinoSwapWithdrawableBalance()
+	const [isDisabled, setIsDisabled] = useState(true)
 
 	const handleClick = async () => {
 		if (!bao) return
 
+		setIsDisabled(true)
 		const RhinoContract = bao.getContract('rhinoSwap')
 		if (swapDirection) {
 			// PNDA->Rhino
-			if (withdrawableBalance.gt(0))
+			if (withdrawableBalance.gt(0)) {
 				handleTx(RhinoContract.methods.withdraw(Config.addressMap.Rhino).send({ from: account }), 'RhinoSwap: Withdraw Rhino')
+				setIsDisabled(false)
+			}
 		} else {
 			// Rhino->PNDA
-			if (withdrawableBalance.gt(0))
+			if (withdrawableBalance.gt(0)) {
 				handleTx(RhinoContract.methods.withdraw(Config.addressMap.PNDA).send({ from: account }), 'RhinoSwap: Withdraw PNDA')
+				setIsDisabled(false)
+			}
 		}
 	}
 
@@ -51,7 +57,11 @@ const RhinoWithdrawButton: React.FC<RhinoWithdrawButtonProps> = ({ swapDirection
 		}
 	}
 
-	return <SubmitButton onClick={handleClick}>{buttonText()}</SubmitButton>
+	return (
+		<SubmitButton onClick={handleClick} disabled={isDisabled}>
+			{buttonText()}
+		</SubmitButton>
+	)
 }
 
 type RhinoWithdrawButtonProps = {

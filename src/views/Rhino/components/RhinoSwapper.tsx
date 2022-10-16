@@ -1,27 +1,24 @@
-import { faLongArrowAltRight, faShip, faSync } from '@fortawesome/free-solid-svg-icons'
+import { faLongArrowAltRight, faSync } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import RhinoIcon from 'assets/img/tokens/rhino.png'
 import pndaIcon from 'assets/img/tokens/pnda.png'
 import Config from 'bao/lib/config'
-import { getBambooSupply } from 'bao/utils'
 import BigNumber from 'bignumber.js'
 import { IconFlex } from 'components/Icon'
 import { BalanceInput } from 'components/Input'
 import { SpinnerLoader } from 'components/Loader'
 import Tooltipped from 'components/Tooltipped'
 import useBao from 'hooks/base/useBao'
-import usePandaBalance from 'hooks/base/usePandaBalance'
 import useTokenBalance from 'hooks/base/useTokenBalance'
-import useTransactionProvider from 'hooks/base/useTransactionProvider'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Badge, Card } from 'react-bootstrap'
 import styled from 'styled-components'
-import Multicall from 'utils/multicall'
 import { decimate, getDisplayBalance } from 'utils/numberFormat'
 import { AssetStack } from 'views/Markets/components/styles'
 import RhinoButton from './RhinoButton'
 import RhinoWithdrawButton from './RhinoWithdrawButton'
 import useRhinoPandaBalance from 'hooks/base/useRhinoPandaBalance'
+import { useRhinoSwapWithdrawableBalance } from '../../../hooks/base/useWithdrawableBalance'
 
 const ZERO = String(0)
 
@@ -37,6 +34,8 @@ const RhinoSwapper: React.FC = () => {
 	const pandaBalance = useRhinoPandaBalance(bao && bao.getContract('bao').options.address)
 	const rhinoBalance = useRhinoPandaBalance(bao && bao.getContract('rhino').options.address)
 
+	const withdrawableBalance = useRhinoSwapWithdrawableBalance()
+
 	const pndaInput = (
 		<>
 			<BallastLabel>
@@ -44,10 +43,10 @@ const RhinoSwapper: React.FC = () => {
 				<span>Contract Reserves: {pandaBalance ? getDisplayBalance(pandaBalance).toString() : <SpinnerLoader />} </span>
 			</BallastLabel>
 			<BalanceInput
-				onMaxClick={() => setInputVal(decimate(pndaBalance).toString())}
+				onMaxClick={() => (pndaBalance.gt(0) ? setInputVal(decimate(pndaBalance).toString()) : 0)}
 				onChange={(e: { currentTarget: { value: React.SetStateAction<string> } }) => setInputVal(e.currentTarget.value)}
 				value={swapDirection && !new BigNumber(inputVal).isNaN() ? new BigNumber(ZERO).toString() : inputVal}
-				disabled={swapDirection}
+				disabled={swapDirection && withdrawableBalance.gt(0)}
 				label={
 					<AssetStack>
 						<IconFlex>
@@ -69,7 +68,7 @@ const RhinoSwapper: React.FC = () => {
 				onMaxClick={() => setInputVal(decimate(rhino, 9).toString())}
 				onChange={(e: { currentTarget: { value: React.SetStateAction<string> } }) => setInputVal(e.currentTarget.value)}
 				value={!swapDirection && !new BigNumber(inputVal).isNaN() ? new BigNumber(ZERO).toFixed(0) : inputVal}
-				disabled={!swapDirection}
+				disabled={!swapDirection && withdrawableBalance.gt(0)}
 				label={
 					<AssetStack>
 						<IconFlex>

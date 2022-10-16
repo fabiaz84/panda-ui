@@ -1,5 +1,4 @@
 import { useWeb3React } from '@web3-react/core'
-import Config from 'bao/lib/config'
 import { getMasterChefContract } from 'bao/utils'
 import BigNumber from 'bignumber.js'
 import { SpinnerLoader } from 'components/Loader'
@@ -10,14 +9,14 @@ import { PoolType } from 'contexts/Farms/types'
 import useBao from 'hooks/base/useBao'
 import useAllFarmTVL from 'hooks/farms/useAllFarmTVL'
 import useFarms from 'hooks/farms/useFarms'
-import usePandaLPBalance from 'hooks/base/usePandaLPBalance'
 import React, { useEffect, useState } from 'react'
 import { Col, Container, Form, Row } from 'react-bootstrap'
 import styled from 'styled-components'
-import GraphUtil from 'utils/graph'
 import Multicall from 'utils/multicall'
 import { decimate, getDisplayBalance, truncateNumber } from 'utils/numberFormat'
 import { FarmModal } from './Modals'
+import Coingecko from '../../../utils/coingecko'
+import usePandaBalance from '../../../hooks/base/usePandaBalance'
 
 export interface FarmWithStakedValue extends Farm {
 	apy: BigNumber
@@ -29,8 +28,9 @@ export const FarmList: React.FC = () => {
 	const [farms] = useFarms()
 	const farmsTVL = useAllFarmTVL(bao, bao && bao.multicall)
 	const { account } = useWeb3React()
-	const pandaBalance = usePandaLPBalance(bao && bao.getContract('bao').options.address)
-	const bnbBalance = usePandaLPBalance(bao && bao.getContract('weth').options.address)
+	const address = '0x97f6665ac6b2d7C3d5a2aD11d7a779787F617ce0'
+	const pandaBalance = usePandaBalance(bao && bao.getContract('bao').options.address, address)
+	const bnbBalance = usePandaBalance(bao && bao.getContract('weth').options.address, address)
 
 	const [baoPrice, setBaoPrice] = useState<BigNumber | undefined>()
 	const [pools, setPools] = useState<any | undefined>({
@@ -48,8 +48,8 @@ export const FarmList: React.FC = () => {
 
 	useEffect(() => {
 		if (!bao) return
-		fetch('https://api.coingecko.com/api/v3/simple/price?ids=binancecoin&vs_currencies=usd').then(async res => {
-			setBaoPrice(new BigNumber((await res.json())['binancecoin'].usd))
+		Coingecko.getPricesByCoinApiIdsAndCurrency(['binancecoin'], 'usd').then(async res => {
+			setBaoPrice(new BigNumber((await res)['binancecoin'].usd))
 		})
 
 		const pandaRate = new BigNumber(pandaBalance)

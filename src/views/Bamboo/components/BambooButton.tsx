@@ -10,7 +10,7 @@ import useAllowancev2 from 'hooks/base/useAllowancev2'
 import useBao from 'hooks/base/useBao'
 import useTransactionHandler from 'hooks/base/useTransactionHandler'
 import React, { useMemo } from 'react'
-import { decimate, exponentiate } from 'utils/numberFormat'
+import { exponentiate } from 'utils/numberFormat'
 
 const BambooButton: React.FC<BambooButtonProps> = ({ swapDirection, inputVal, maxValues }: BambooButtonProps) => {
 	const bao = useBao()
