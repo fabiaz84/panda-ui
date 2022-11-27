@@ -6,6 +6,7 @@ import RhinoSwapper from './components/RhinoSwapper'
 import RhinoInfo from './components/RhinoInfo'
 import { Helmet } from 'react-helmet'
 import { StyledInfo } from 'views/NFT/components/styles'
+import { SwapHeader } from '../../styles/styledComponents'
 
 const Rhino: React.FC = () => {
 	return (
@@ -17,42 +18,13 @@ const Rhino: React.FC = () => {
 			<PageHeader icon='' title='Welcome to RhinoSwap' />
 			<RhinoInfo />
 			<StyledInfo>
-				<div
-					style={{
-						alignItems: 'center',
-						display: 'flex',
-						flex: 1,
-						justifyContent: 'center',
-						width: '1200px',
-						textAlign: 'center',
-					}}
-				>
+				<SwapHeader>
 					Swap PNDA for Rhino!
-				</div>
-				<div
-					style={{
-						alignItems: 'center',
-						display: 'flex',
-						flex: 1,
-						justifyContent: 'center',
-						width: '1200px',
-						textAlign: 'center',
-					}}
-				>
+					<br />
 					You will earn a portion of the swaps fees based on the relative percentage of Rhino held.
-				</div>
-				<div
-					style={{
-						alignItems: 'center',
-						display: 'flex',
-						flex: 1,
-						justifyContent: 'center',
-						width: '1200px',
-						textAlign: 'center',
-					}}
-				>
+					<br />
 					Rhino can only be obtained from this contract until the supply is depleted.
-				</div>
+				</SwapHeader>
 			</StyledInfo>
 			<Container>
 				<RhinoSwapper />

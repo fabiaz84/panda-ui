@@ -26,8 +26,8 @@ export const navItems = [
 	},
 	{
 		title: 'Swap',
-		type: 'url',
-		link: 'https://pandaswap.xyz',
+		type: 'link',
+		link: '/swap',
 	},
 	{
 		title: 'Vote',

@@ -29,6 +29,7 @@ import Landing from '../src/views/Landing'
 import { navItems } from 'views/navItems'
 import Bamboo from 'views/Bamboo'
 import Rhino from 'views/Rhino'
+import Swap from 'views/Swap'
 
 function getLibrary(provider: provider) {
 	return new Web3(provider)
@@ -86,6 +87,7 @@ const App: React.FC = () => {
 						<Route path='/' element={<Landing />} />
 						<Route path='/Bamboo' element={<Bamboo />} />
 						<Route path='/Rhino' element={<Rhino />} />
+						<Route path='/Swap' element={<Swap />} />
 						{/*	<Route path='/markets/:marketId' element={<Market />} />*/}
 						{/*	<Route path='/ballast' element={<Ballast />} />*/}
 						<Route path='/farms' element={<Farms />} />

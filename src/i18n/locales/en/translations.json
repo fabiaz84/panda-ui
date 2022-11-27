@@ -1,3 +1,7 @@
 {
-  "NavBar.About": "About"
+  "NavBar.About": "About",
+  "Swap.Title": "Panda | Pandaswap",
+  "Swap.Meta.Content": "Pandaswap interface",
+  "Swap.PageHeader.Title": "Welcome to PandaSwap",
+  "Swap.SwapHeader": "Swap tokens using a multi-chain through Binance Smart Chain (BSC)."
 }

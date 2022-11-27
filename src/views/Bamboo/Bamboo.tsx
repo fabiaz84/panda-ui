@@ -6,6 +6,7 @@ import BambooSwapper from './components/BambooSwapper'
 import BambooInfo from './components/BambooInfo'
 import { Helmet } from 'react-helmet'
 import { StyledInfo } from 'views/NFT/components/styles'
+import { SwapHeader } from '../../styles/styledComponents'
 
 const Bamboo: React.FC = () => {
 	return (
@@ -17,42 +18,13 @@ const Bamboo: React.FC = () => {
 			<PageHeader icon='' title='Welcome to the BambooBar' />
 			<BambooInfo />
 			<StyledInfo>
-				<div
-					style={{
-						alignItems: 'center',
-						display: 'flex',
-						flex: 1,
-						justifyContent: 'center',
-						width: '1200px',
-						textAlign: 'center',
-					}}
-				>
+				<SwapHeader>
 					Stake PNDA for Bamboo!
-				</div>
-				<div
-					style={{
-						alignItems: 'center',
-						display: 'flex',
-						flex: 1,
-						justifyContent: 'center',
-						width: '1200px',
-						textAlign: 'center',
-					}}
-				>
+					<br />
 					You will earn a portion of the swaps fees based on the amount of Bamboo held relative the weight of the staking.
-				</div>
-				<div
-					style={{
-						alignItems: 'center',
-						display: 'flex',
-						flex: 1,
-						justifyContent: 'center',
-						width: '1200px',
-						textAlign: 'center',
-					}}
-				>
+					<br />
 					Bamboo can be minted by staking Panda. To redeem Panda staked plus swap fees convert Bamboo back to Panda.
-				</div>
+				</SwapHeader>
 			</StyledInfo>
 			<Container>
 				<BambooSwapper />

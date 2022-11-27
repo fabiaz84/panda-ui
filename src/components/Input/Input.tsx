@@ -69,11 +69,24 @@ export interface BalanceInputProps extends InputProps {
 	disabled?: boolean
 }
 
+export interface DisabledInputProps extends InputProps {
+	label?: React.ReactNode
+}
+
 export const BalanceInput = ({ value, label, onChange, onMaxClick, disabled }: BalanceInputProps) => (
 	<BalanceInputContainer>
 		<BalanceInputWrapper>
 			<StyledBalanceInput value={value} onChange={onChange} placeholder='0' disabled={disabled} />
 			{!disabled && <MaxButton onClick={onMaxClick}>MAX</MaxButton>}
+		</BalanceInputWrapper>
+		{typeof label === 'string' ? <p>{label}</p> : label}
+	</BalanceInputContainer>
+)
+
+export const DisabledInput = ({ value, label, onChange }: DisabledInputProps) => (
+	<BalanceInputContainer>
+		<BalanceInputWrapper>
+			<StyledBalanceInput value={value} onChange={onChange} placeholder='0' disabled={true} />
 		</BalanceInputWrapper>
 		{typeof label === 'string' ? <p>{label}</p> : label}
 	</BalanceInputContainer>
